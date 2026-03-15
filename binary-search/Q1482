@@ -1,0 +1,44 @@
+// LeetCode 1482 - Binary Search
+// Time Complexity: O(n · log(maxDay − minDay))
+// Space Complexity: O(1)
+
+class Solution {
+    public int minDays(int[] bloomDay, int m, int k) {
+        long total=(long)m*k;
+        if(total>bloomDay.length){
+            return -1;}
+int low =Integer.MAX_VALUE;
+int high =Integer.MIN_VALUE;
+for(int day:bloomDay){
+    low=Math.min(low,day);
+    high=Math.max(high,day);
+}
+int ans=-1;
+while(low<=high){
+    int mid=low+(high-low)/2;
+ if(canMake(bloomDay,m,k,mid)){
+    ans=mid;
+    high=mid-1;
+ }else{
+    low=mid+1;
+ }
+}return ans;
+        }
+    
+    private boolean canMake(int[]bloomDay,int m,int k,int day){
+       int count=0;
+       int nofBouq=0;
+
+       for(int i:bloomDay){
+        if(i<=day){
+            count++;
+        }else{
+            nofBouq+=count/k;
+            count=0;
+        }
+      
+       }
+       nofBouq+=count/k;
+       return nofBouq>=m;
+    }
+    }
