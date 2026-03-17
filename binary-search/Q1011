@@ -1,0 +1,33 @@
+//Leetcode Ques 1011.
+//Time Complexity-O(sum-max+1)*O(n).
+//Space Complexity-O(1).
+
+class Solution {
+    public int shipWithinDays(int[] weights, int days) {
+        int low=0;
+        int high=0;
+
+        for(int w:weights){
+            low=Math.max(low,w);
+            high=high+w;
+        }while(low<=high){
+            int mid=low+(high-low)/2;
+
+            int noofdays=1;
+            int load=0;
+            for(int w:weights){
+                if(load+w>mid){
+                    noofdays++;
+                    load=w;
+                }else{
+                    load=load+w;
+                }
+            }if(noofdays<=days){
+                high=mid-1;
+            }else{
+                low=mid+1;
+            }
+        }
+        return low;
+    }
+}
