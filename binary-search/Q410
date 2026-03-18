@@ -1,0 +1,35 @@
+//Leetcode Q410-Binary Search
+//Time Complexity-O(n * log(S - M))
+//Space Complexity-O(1).
+class Solution {
+    public int splitArray(int[] nums, int k) {
+        int low=0;
+        int high=0;
+         for(int i:nums){
+        low=Math.max(low,i);
+        high=high+i;
+    }
+    while(low<=high){
+        int mid=low+(high-low)/2;
+        if(cansplit(nums,k,mid)){
+          high=mid-1;
+        }else{
+            low=mid+1;
+        }
+    }
+    return low;
+    }
+    private boolean cansplit(int[]nums,int k,int maxsum){
+        int count=1;
+        int sum=0;
+        for(int num:nums){
+           if(sum+num>maxsum){
+            count++;
+            sum=num;
+           }else{
+            sum=sum+num;
+           }
+        }
+        return count<=k;
+    }
+    }
