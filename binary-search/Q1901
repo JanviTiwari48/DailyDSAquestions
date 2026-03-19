@@ -1,0 +1,37 @@
+//Leetcode Q1901-Binary Search
+
+class Solution {
+    public int[] findPeakGrid(int[][] mat) {
+        int n = mat.length;
+        int m = mat[0].length;
+
+        int low = 0, high = m - 1;
+
+        while (low <= high) {
+            int midCol = low + (high - low) / 2;
+
+            // find max element row in this column
+            int maxRow = 0;
+            for (int i = 0; i < n; i++) {
+                if (mat[i][midCol] > mat[maxRow][midCol]) {
+                    maxRow = i;
+                }
+            }
+
+            int left = (midCol - 1 >= 0) ? mat[maxRow][midCol - 1] : -1;
+            int right = (midCol + 1 < m) ? mat[maxRow][midCol + 1] : -1;
+
+            if (mat[maxRow][midCol] > left && mat[maxRow][midCol] > right) {
+                return new int[]{maxRow, midCol};
+            } 
+            else if (mat[maxRow][midCol] < right) {
+                low = midCol + 1;
+            } 
+            else {
+                high = midCol - 1;
+            }
+        }
+
+        return new int[]{-1, -1};
+    }
+}
