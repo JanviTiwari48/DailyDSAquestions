@@ -1,0 +1,11 @@
+//Leetcode Ques 1903-largest Odd number in a substring
+class Solution {
+    public String largestOddNumber(String num) {
+        for(int i=num.length();i>=0;i--){
+            if((num.charAt(i)-'0')%2==1){
+                return num.substring(0,i+1);
+            }
+        }
+        return " ";
+    }
+}
