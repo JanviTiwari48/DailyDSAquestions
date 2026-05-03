@@ -1,0 +1,32 @@
+//Leetcode Ques -Watering Plants 2
+class Solution {
+    public int minimumRefill(int[] plants, int capacityA, int capacityB) {
+        int i=0;
+        int j=plants.length-1;
+        int waterA= capacityA;
+        int waterB= capacityB;
+        int refills=0;
+
+        while(i<j){
+            //alice
+            if(waterA<plants[i]){
+                refills++;
+                waterA=capacityA;
+            }waterA=waterA-plants[i];
+            i++;
+            //bob
+            if(waterB<plants[j]){
+                refills++;
+                waterB=capacityB;
+            }
+            waterB=waterB-plants[j];
+            j--;
+        }
+        if(i==j){
+            if(Math.max(waterA,waterB)<plants[i]){
+                refills++;
+            }
+        }
+        return refills;
+    }
+}
