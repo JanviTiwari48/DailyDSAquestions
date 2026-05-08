@@ -1,0 +1,21 @@
+//leetcode ques-Count binary Substrings
+
+class Solution {
+    public int countBinarySubstrings(String s) {
+        int prev=0;
+        int curr=1; //already contains one element
+        int ans=0;
+
+        for(int i=1;i<s.length();i++){
+            if(s.charAt(i)==s.charAt(i-1)){
+                curr++;
+            }else{
+                ans=ans+Math.min(prev,curr);
+                prev=curr;
+                curr=1;
+            }
+        }
+        ans=ans+Math.min(prev,curr);
+        return ans;
+    }
+}
