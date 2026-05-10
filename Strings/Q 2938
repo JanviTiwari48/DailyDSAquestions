@@ -1,0 +1,16 @@
+//Leetcode ques- Seperate white and black balls 
+class Solution {
+    public long minimumSteps(String s) {
+  long ones=0;
+  long ans=0;
+
+  for(char ch: s.toCharArray()){
+    if(ch=='1'){
+        ones++;
+    }else{
+        ans=ans+ones;//add all posible swaps of 1 till we encounter the zero
+    }
+  }
+  return ans;
+    }
+}
