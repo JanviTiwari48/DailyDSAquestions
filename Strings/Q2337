@@ -1,0 +1,52 @@
+//leetcode ques-Move pieces to obtain a string
+class Solution {
+    public boolean canChange(String start, String target) {
+
+        int i = 0;
+        int j = 0;
+        int n = start.length();
+
+        while (i < n || j < n) {
+
+            while (i < n && start.charAt(i) == '_') {
+                i++;
+            }
+
+            while (j < n && target.charAt(j) == '_') {
+                j++;
+            }
+
+            // both finished
+            if (i == n && j == n) {
+                return true;
+            }
+
+            // one finished earlier
+            if (i == n || j == n) {
+                return false;
+            }
+
+            // different chars
+            if (start.charAt(i) != target.charAt(j)) {
+                return false;
+            }
+
+            char ch = start.charAt(i);
+
+            // L can't move right
+            if (ch == 'L' && i < j) {
+                return false;
+            }
+
+            // R can't move left
+            if (ch == 'R' && i > j) {
+                return false;
+            }
+
+            i++;
+            j++;
+        }
+
+        return true;
+    }
+}
