@@ -1,3 +1,5 @@
+//Leetcode ques-LinkedList 2
+
 public class Solution {
     public ListNode detectCycle(ListNode head) {
         
