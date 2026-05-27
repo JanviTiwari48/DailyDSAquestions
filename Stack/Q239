@@ -1,0 +1,51 @@
+//Leetcode ques-Sliding window maximum
+
+class Solution {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        //brute method
+//         int n=nums.length;
+//         int[]ans =new int[n-k+1];//n-(k-1)
+// int z=0;
+//         for(int i=0;i<n-k+1;i++){
+//            int max=Integer.MIN_VALUE;
+//            for(int j=i;j<i+k;j++){
+//             max=Math.max(max,nums[j]);
+//            } 
+//          ans[z]=max;
+//            z++;
+//         }
+//         return ans;
+
+//better 
+
+       int n=nums.length;
+        
+         int[]ans =new int[n-k+1];//n-(k-1)
+        int z=0;
+
+      Stack<Integer>st=new Stack<>();
+      int[]nge=new int[n];
+
+      st.push(n-1);
+      nge[n-1]=n;
+         for(int i=n-2;i>=0;i--){
+             while(st.size()>0 && nums[i]>nums[st.peek()]){
+                st.pop();
+             }if(st.size()==0)nge[i]=n;
+             else nge[i]=st.peek();
+             st.push(i);
+         }
+         int j=0;
+         for(int i=0;i<n-k+1;i++){
+         if(j>=i+k)j=i;//agar j window se hi bahar nikl gya h
+              int max=nums[j];
+            while(j<i+k){//j window k ander hi rehna chahiye
+          max=nums[j];
+          j=nge[j];
+            }
+            ans[z]=max;
+            z++;
+         }
+   return ans;
+    }
+}
