@@ -1,0 +1,24 @@
+//Leetcode ques-Modify the matrix
+
+class Solution {
+    public int[][] modifiedMatrix(int[][] matrix) {
+        
+        int m=matrix.length;
+        int n=matrix[0].length;
+
+        for(int c=0;c<n;c++){
+    int maxC=Integer.MIN_VALUE;
+
+    for(int r=0;r<m;r++){
+        maxC=Math.max(maxC,matrix[r][c]);
+        
+    }
+      for(int r = 0; r < m; r++) {
+                if (matrix[r][c] == -1) {
+                    matrix[r][c] = maxC;
+                }
+            }
+        }
+        return matrix;
+    }
+}
