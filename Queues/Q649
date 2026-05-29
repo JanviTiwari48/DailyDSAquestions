@@ -1,0 +1,27 @@
+//Leetcode ques-Dota2 Senate
+
+
+class Solution {
+    public String predictPartyVictory(String senate) {
+        
+        int n=senate.length();
+        Queue<Integer>rad=new LinkedList<>();//store indexes
+        Queue<Integer>dire=new LinkedList<>();
+
+        for(int i=0;i<n;i++){
+            if(senate.charAt(i)=='R')rad.add(i);
+            else dire.add(i);
+        }
+
+        while(rad.size()>0 && dire.size()>0){
+            int r=rad.remove();
+            int d=dire.remove();
+
+            if(r<d) rad.add(r+n);//peeche se add(position in the next round)
+
+            else dire.add(d+n);
+        }
+            if(rad.size()==0)return "Dire";
+            else return "Radiant";
+            }
+}
