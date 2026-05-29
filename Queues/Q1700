@@ -1,0 +1,26 @@
+//Leetcode ques-Number of Students Unable to Eat Lunch
+class Solution {
+    public int countStudents(int[] students, int[] sandwiches) {
+        
+        Queue<Integer>q=new LinkedList<>();
+
+        for(int s:students){
+            q.add(s);
+        }
+        int i=0;//sandwich iterator
+        int rotations=0;//moving back
+
+        while(q.size()>0 && rotations<q.size()){
+            if(q.peek()==sandwiches[i]){
+            q.remove();//student remove
+
+            i++;//next sandwich
+                 rotations=0;//student ate toh ab new student
+        }else{
+            q.add(q.remove());
+            rotations++;
+        }
+        }
+        return q.size();//kite students bache h
+    }
+}
