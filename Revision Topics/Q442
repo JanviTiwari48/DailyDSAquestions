@@ -1,0 +1,22 @@
+//Leetcode ques-Find All Duplicates in an Array
+
+class Solution {
+    public List<Integer> findDuplicates(int[] nums) {
+        
+
+        HashMap<Integer,Integer>map=new HashMap<>();
+        ArrayList<Integer>list=new ArrayList<>();
+
+        for(int n:nums){
+            map.put(n,map.getOrDefault(n,0)+1);
+        }
+
+        for(int n:nums){
+            if(map.get(n)==2){
+            list.add(n);
+            map.put(n,0);//wapis freq 0 set
+            }
+        }
+        return list;
+    }
+}
