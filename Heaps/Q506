@@ -1,0 +1,42 @@
+//Leetcode ques-Relative Ranks
+
+class Solution {
+    static class Pair implements Comparable<Pair>{
+           int score;
+           int idx;
+            
+            Pair(int score,int idx){
+                this.score=score;
+                this.idx=idx;
+            }
+            public int compareTo(Pair p){
+                return p.score-this.score;//max heap
+            }
+    }
+    public String[] findRelativeRanks(int[] score) {
+        int n=score.length;
+        String[] ans = new String[n];
+         
+         PriorityQueue<Pair> pq = new PriorityQueue<>();
+        for(int i=0;i<n;i++){
+            pq.add(new Pair(score[i],i));
+        }
+          int rank = 1;
+
+        while (!pq.isEmpty()) {
+            Pair curr = pq.remove();
+
+            if (rank == 1) {
+                ans[curr.idx] = "Gold Medal";
+            } else if (rank == 2) {
+                ans[curr.idx] = "Silver Medal";
+            } else if (rank == 3) {
+                ans[curr.idx] = "Bronze Medal";
+            } else {
+                ans[curr.idx] = String.valueOf(rank);
+            }
+            rank++;
+        }
+        return ans;
+    }
+}
