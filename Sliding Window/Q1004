@@ -1,0 +1,26 @@
+Max Consecutive Ones III
+
+class Solution {
+    public int longestOnes(int[] nums, int k) {
+        
+        int i=0;
+        int j=0;
+        int zeroCount=0;
+        int ans=0;
+
+        while(j<nums.length){
+       
+       if(nums[j]==0)zeroCount++;
+
+       while(zeroCount>k){//window is not valid
+
+        if(nums[i]==0) zeroCount--;//shrink from left
+
+          i++;
+       }
+    ans=Math.max(ans,j-i+1);
+j++;
+        }
+        return ans;
+    }
+}
