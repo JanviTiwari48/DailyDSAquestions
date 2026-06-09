@@ -1,0 +1,15 @@
+Check if Array Is Sorted and Rotated
+class Solution {
+    public boolean check(int[] nums) {
+       return help(nums,0,0);
+    }
+    private boolean help(int[] nums,int index,int count){
+        if(count>1)return false;
+
+        if(index==nums.length)return true;
+
+        if (nums[index] > nums[(index + 1) % nums.length])count++;
+
+return help(nums,index+1,count);
+    }
+}
