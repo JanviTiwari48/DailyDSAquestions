@@ -1,0 +1,36 @@
+Delete Node in a BST
+class Solution {
+    public TreeNode delete(TreeNode root,int target){
+        if(root== null)return null;
+
+        if(target<root.val){//left subtree
+            root.left=delete(root.left,target);
+        }else if(target>root.val){
+            //right subtree
+            root.right=delete(root.right,target);
+        }
+        else{
+
+          if(root.left==null && root.right==null){
+            //0 child
+            return null;
+          }
+          if(root.left==null)return root.right;//1child
+          if(root.right==null)return root.left;
+
+         //2 children
+         TreeNode pred=root.left;
+         while(pred.right!=null){
+            pred=pred.right;
+         }
+         root.val=pred.val;
+
+         root.left=delete(root.left,pred.val);
+        }
+        return root;
+    }
+
+    public TreeNode deleteNode(TreeNode root, int key) {
+        return delete(root,key);
+    }
+}
