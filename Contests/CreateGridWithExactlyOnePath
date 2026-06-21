@@ -1,0 +1,24 @@
+class Solution {
+    public String[] createGrid(int m, int n) {
+
+        String[] grid=new String[m];
+
+        StringBuilder firstrow=new StringBuilder();
+
+        for(int i=0;i<n;i++){
+            firstrow.append('.');
+            
+        }  grid[0]=firstrow.toString();
+
+      for(int j=1;j<m;j++){
+          StringBuilder row=new StringBuilder();
+          for(int k=0;k<n-1;k++){
+              row.append('#');
+          }
+          row.append('.');
+          grid[j]=row.toString();
+      }
+     return grid;   
+ 
+    }
+}
