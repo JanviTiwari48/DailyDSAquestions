@@ -1,0 +1,21 @@
+class Solution {
+    public long maxSum(int[] nums, int k, int mul) {
+
+  Arrays.sort(nums);
+        long ans=0;
+        
+        int idx=nums.length-1;
+        
+        while(k>0){
+            long x=nums[idx];
+            ans=ans+Math.max(x,x * (long)mul);
+
+            mul--;
+            idx--;
+            k--;
+        }
+return ans;
+
+        
+    }
+}
