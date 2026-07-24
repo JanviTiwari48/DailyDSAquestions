@@ -1,0 +1,40 @@
+class Solution {
+    public String reorganizeString(String s) {
+        
+        HashMap<Character,Integer>map=new HashMap<>();
+
+        for(char ch:s.toCharArray()){
+            map.put(ch,map.getOrDefault(ch,0)+1);
+        }
+        //max heap based on frequency
+        PriorityQueue<Map.Entry<Character,Integer>>pq=new PriorityQueue<>((a,b)-> b.getValue()-a.getValue());
+
+        for(Map.Entry<Character,Integer>entry:map.entrySet()){//add all key values to heap
+            pq.add(entry);
+        }
+        StringBuilder ans=new StringBuilder();
+        Map.Entry<Character,Integer>prev=null;//prev char to keep seperate
+
+        while(pq.size()>0){
+
+            Map.Entry<Character,Integer>curr=pq.remove();//char with highest freq
+            ans.append(curr.getKey());//append it...a
+
+            curr.setValue(curr.getValue()-1);//descrease its freq....a2
+
+            if (prev!= null && prev.getValue() > 0) {
+            // Put previous character back into heap if it still has occurrences left
+                pq.offer(prev);
+            }
+            // Current becomes previous
+            prev=curr;
+
+        }
+        // If we couldn't use all characters, it's impossible
+        if (ans.length()!=s.length()) return "";
+        
+
+        return ans.toString();
+
+    }
+}
